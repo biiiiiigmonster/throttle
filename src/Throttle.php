@@ -27,7 +27,7 @@ class Throttle
         // Parse express language
         $el = new ExpressionLanguage();
         $values = array_merge($args,[
-            'request' => context()->getRequest(),//表达式支持请求对象
+            'request' => context()->getRequest(),// 表达式支持请求对象
             'CLASS' => $className,
             'METHOD' => $method,
         ]);
