@@ -6,8 +6,14 @@ namespace BiiiiiigMonster\Throttle\Annotation\Parser;
 
 use BiiiiiigMonster\Throttle\Annotation\Mapping\Throttle;
 use BiiiiiigMonster\Throttle\ThrottleRegister;
+use Swoft\Annotation\Annotation\Mapping\AnnotationParser;
 use Swoft\Annotation\Annotation\Parser\Parser;
 
+/**
+ * Class ThrottleParser
+ * @package BiiiiiigMonster\Throttle\Annotation\Parser
+ * @AnnotationParser(Throttle::class)
+ */
 class ThrottleParser extends Parser
 {
     /**
