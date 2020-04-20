@@ -7,7 +7,7 @@ Throttle component for swoft framework
 - install by composer
 
 ```bash
-composer require root/throttle
+composer require biiiiiigmonster/throttle
 ```
 
 ## LICENSE
