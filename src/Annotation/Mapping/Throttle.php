@@ -23,7 +23,7 @@ class Throttle
     /**
      * @var string
      */
-    private $prefix = 'biiiiiigmonster:throttle:';
+    private $prefix = 'throttle:';
 
     /**
      * @var string
@@ -57,6 +57,7 @@ class Throttle
         if (isset($values['key'])) {
             $this->key = $values['key'];
         }
+        //暂时不建议自定义缓存标识前缀
         if (isset($values['prefix'])) {
             $this->prefix = $values['prefix'];
         }
