@@ -26,7 +26,7 @@ class ThrottleRegister
         $ttl = $value * ArrayHelper::get(['s'=>1,'m'=>60,'h'=>60*60,'d'=>60*60*24],$unit,1);
 
         $throttleConfig = [$throttle->getPrefix(),$throttle->getKey(),$maxAccepts,$ttl,$throttle->isIdempotent()];
-        self::$throttle[$className][$method] = $throttleConfig;
+        self::$throttle[$className][$method][] = $throttleConfig;
     }
 
     /**
