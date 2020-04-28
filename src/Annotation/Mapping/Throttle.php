@@ -10,7 +10,7 @@ use Doctrine\Common\Annotations\Annotation\Target;
  * Class Throttle
  * @package BiiiiiigMonster\Throttle\Annotation\Mapping
  * @Annotation
- * @Target("METHOD")
+ * @Target({"METHOD","ANNOTATION"})
  * @Attributes(
  *     @Attribute("frequency",type="string"),
  *     @Attribute("prefix",type="string"),
