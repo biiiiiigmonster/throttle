@@ -9,7 +9,6 @@ use BiiiiiigMonster\Throttle\Throttle;
 use BiiiiiigMonster\Throttle\ThrottleRegister;
 use BiiiiiigMonster\Throttle\Annotation\Mapping\Throttle as ThrottleMapping;
 use Swoft\Aop\Annotation\Mapping\After;
-use Swoft\Aop\Annotation\Mapping\AfterReturning;
 use Swoft\Aop\Annotation\Mapping\Around;
 use Swoft\Aop\Annotation\Mapping\Aspect;
 use Swoft\Aop\Annotation\Mapping\Before;
@@ -114,9 +113,8 @@ class ThrottleAspect
     }
 
     /**
-     * @AfterReturning()
+     * @After()
      * @param JoinPoint $joinPoint
-     * @return mixed
      */
     public function afterReturn(JoinPoint $joinPoint)
     {
@@ -132,7 +130,5 @@ class ThrottleAspect
             }
             $this->cache->inc("{$prefix}{$key}");//执行完毕，访问计数+1
         }
-
-        return $joinPoint->getReturn();
     }
 }
