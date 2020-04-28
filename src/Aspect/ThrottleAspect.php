@@ -116,8 +116,9 @@ class ThrottleAspect
     /**
      * @AfterReturning()
      * @param JoinPoint $joinPoint
+     * @return mixed
      */
-    public function afterReturning(JoinPoint $joinPoint)
+    public function afterReturn(JoinPoint $joinPoint)
     {
         $argsMap = $joinPoint->getArgsMap();
         $method = $joinPoint->getMethod();
@@ -131,5 +132,7 @@ class ThrottleAspect
             }
             $this->cache->inc("{$prefix}{$key}");//执行完毕，访问计数+1
         }
+
+        return $joinPoint->getReturn();
     }
 }
