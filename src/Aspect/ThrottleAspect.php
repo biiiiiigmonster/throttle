@@ -58,10 +58,9 @@ class ThrottleAspect
                 //如果没有从缓存注解中解析出有效key（因为ThrottleRegister注解key非必填），则采用默认规则来赋值key
                 $key = "$className@$method";
             }
-            $times = $this->cache->get("{$prefix}{$key}");
+            $times = $this->cache->remember("{$prefix}{$key}",0,$ttl);
             if($times>=$maxAccept) {
                 $check = false;
-                break;
             }
         }
 
@@ -74,6 +73,7 @@ class ThrottleAspect
 
     /**
      * @After()
+     * After注解，无论切点是正常执行还是抛出异常，都会执行此处
      * @param JoinPoint $joinPoint
      */
     public function after(JoinPoint $joinPoint)
