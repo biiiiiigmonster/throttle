@@ -20,6 +20,7 @@ class ThrottleRegister
      */
     public static function register(string $className,string $method,Throttle $throttle): void
     {
+        var_dump($throttle->getFrequency());
         [$maxAccepts,$duration] = explode('/',$throttle->getFrequency(),2);
         $value = substr($duration,0,-1);
         $unit = substr($duration,-1);

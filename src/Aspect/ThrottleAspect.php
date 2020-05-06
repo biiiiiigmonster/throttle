@@ -8,6 +8,7 @@ use BiiiiiigMonster\Throttle\Exception\ThrottleException;
 use BiiiiiigMonster\Throttle\Throttle;
 use BiiiiiigMonster\Throttle\ThrottleRegister;
 use BiiiiiigMonster\Throttle\Annotation\Mapping\Throttle as ThrottleMapping;
+use BiiiiiigMonster\Throttle\Annotation\Mapping\Throttles as ThrottlesMapping;
 use Swoft\Aop\Annotation\Mapping\After;
 use Swoft\Aop\Annotation\Mapping\Around;
 use Swoft\Aop\Annotation\Mapping\Aspect;
@@ -23,14 +24,13 @@ use Swoft\Bean\Annotation\Mapping\Inject;
  *
  * @Aspect()
  * @PointAnnotation(
- *     include={ThrottleMapping::class}
+ *     include={ThrottleMapping::class,ThrottlesMapping::class}
  * )
  */
 class ThrottleAspect
 {
     /**
      * @Inject()
-     *
      * @var Throttle
      */
     private Throttle $throttle;
@@ -61,7 +61,7 @@ class ThrottleAspect
             }
 
             //第一次访问初始化计数，有效时间$ttl
-            $times = $this->cache->remember("{$prefix}{$key}",1,$ttl);
+            $times = $this->cache->remember("{$prefix}{$key}",0,$ttl);
             if($times>=$maxAccept && $idempotent) {
                 $isIdempotent = true;
                 break;
@@ -99,7 +99,7 @@ class ThrottleAspect
                 $key = "$className@$method";
             }
             $times = $this->cache->get("{$prefix}{$key}");
-            if($times>$maxAccept) {
+            if($times>=$maxAccept) {
                 $check = false;
                 break;
             }
@@ -116,7 +116,7 @@ class ThrottleAspect
      * @After()
      * @param JoinPoint $joinPoint
      */
-    public function afterReturn(JoinPoint $joinPoint)
+    public function after(JoinPoint $joinPoint)
     {
         $argsMap = $joinPoint->getArgsMap();
         $method = $joinPoint->getMethod();

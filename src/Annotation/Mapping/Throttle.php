@@ -18,7 +18,7 @@ use Doctrine\Common\Annotations\Annotation\Target;
  *     @Attribute("idempotent",type="bool"),
  * )
  */
-class Throttle
+final class Throttle
 {
     /**
      * @var string
