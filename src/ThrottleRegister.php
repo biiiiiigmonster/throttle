@@ -20,13 +20,12 @@ class ThrottleRegister
      */
     public static function register(string $className,string $method,Throttle $throttle): void
     {
-        var_dump($throttle->getFrequency());
         [$maxAccepts,$duration] = explode('/',$throttle->getFrequency(),2);
         $value = substr($duration,0,-1);
         $unit = substr($duration,-1);
         $ttl = $value * ArrayHelper::get(['s'=>1,'m'=>60,'h'=>60*60,'d'=>60*60*24],$unit,1);
 
-        $throttleConfig = [$throttle->getPrefix(),$throttle->getKey(),$maxAccepts,$ttl,$throttle->isIdempotent()];
+        $throttleConfig = [$throttle->getPrefix(),$throttle->getKey(),$maxAccepts,$ttl];
         self::$throttle[$className][$method][] = $throttleConfig;
     }
 
