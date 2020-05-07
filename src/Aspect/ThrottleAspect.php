@@ -53,7 +53,7 @@ class ThrottleAspect
 
         $throttles = ThrottleRegister::get($className,$method);
         $check = true;
-        foreach ($throttles as [$prefix,$key,$maxAccept,$ttl]) {
+        foreach ($throttles as $key=>[$prefix,$maxAccept,$ttl]) {
             if(!$key = $this->throttle->evaluateKey($key,$className,$method,$argsMap)) {
                 //如果没有从缓存注解中解析出有效key（因为ThrottleRegister注解key非必填），则采用默认规则来赋值key
                 $key = "$className@$method";
@@ -83,7 +83,7 @@ class ThrottleAspect
         $className = $joinPoint->getClassName();
 
         $throttles = ThrottleRegister::get($className,$method);
-        foreach ($throttles as [$prefix,$key,$maxAccept,$ttl]) {
+        foreach ($throttles as $key=>[$prefix,$maxAccept,$ttl]) {
             if(!$key = $this->throttle->evaluateKey($key,$className,$method,$argsMap)) {
                 //如果没有从缓存注解中解析出有效key（因为ThrottleRegister注解key非必填），则采用默认规则来赋值key
                 $key = "$className@$method";

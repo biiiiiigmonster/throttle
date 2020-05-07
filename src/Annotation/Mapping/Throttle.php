@@ -4,6 +4,7 @@ namespace BiiiiiigMonster\Throttle\Annotation\Mapping;
 
 use Doctrine\Common\Annotations\Annotation\Attribute;
 use Doctrine\Common\Annotations\Annotation\Attributes;
+use Doctrine\Common\Annotations\Annotation\Required;
 use Doctrine\Common\Annotations\Annotation\Target;
 
 /**
@@ -12,10 +13,9 @@ use Doctrine\Common\Annotations\Annotation\Target;
  * @Annotation
  * @Target({"METHOD","ANNOTATION"})
  * @Attributes(
- *     @Attribute("frequency",type="string"),
+ *     @Attribute("rate",type="string"),
  *     @Attribute("prefix",type="string"),
  *     @Attribute("key",type="string"),
- *     @Attribute("idempotent",type="bool"),
  * )
  */
 final class Throttle
@@ -34,7 +34,7 @@ final class Throttle
      * @var string
      * @example 1/1m,1/5m,5/30s... unit support [s:每秒,m:每分,h:每小时,d:每天]
      */
-    private $frequency = '1/1m';
+    private $rate = '1/1m';
 
     /**
      * Throttle constructor.
@@ -43,10 +43,10 @@ final class Throttle
     public function __construct(array $values)
     {
         if (isset($values['value'])) {
-            $this->frequency = $values['value'];
+            $this->rate = $values['value'];
         }
-        if (isset($values['frequency'])) {
-            $this->frequency = $values['frequency'];
+        if (isset($values['rate'])) {
+            $this->rate = $values['rate'];
         }
         if (isset($values['key'])) {
             $this->key = $values['key'];
@@ -68,9 +68,9 @@ final class Throttle
     /**
      * @return string
      */
-    public function getFrequency(): string
+    public function getRate(): string
     {
-        return $this->frequency;
+        return $this->rate;
     }
 
     /**

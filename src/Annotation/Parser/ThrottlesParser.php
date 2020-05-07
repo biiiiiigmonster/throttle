@@ -22,13 +22,11 @@ class ThrottlesParser extends Parser
      */
     public function parse(int $type, $annotationObject): array
     {
-        $throttles = $annotationObject->getThrottles();
-
         if($type != self::TYPE_METHOD) {
             return [];
         }
 
-        foreach ($throttles as $throttle) {
+        foreach ($annotationObject->getThrottles() as $throttle) {
             if (!$throttle instanceof Throttle) {
                 continue;
             }
