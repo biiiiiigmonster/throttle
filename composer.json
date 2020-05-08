@@ -9,7 +9,8 @@
   "description": "throttle component for swoft framework",
   "license": "Apache-2.0",
   "require": {
-    "php": ">=7.4"
+    "php": ">=7.4",
+    "biiiiiigmonster/cache": "@dev"
   },
   "autoload": {
     "psr-4": {
