@@ -23,7 +23,7 @@ class ThrottleParser extends Parser
      */
     public function parse(int $type, $annotationObject): array
     {
-        if ($type == self::TYPE_METHOD) {
+        if ($type != self::TYPE_METHOD) {
             return [];
         }
 

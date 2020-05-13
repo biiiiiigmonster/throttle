@@ -8,7 +8,6 @@ use BiiiiiigMonster\Throttle\Exception\ThrottleException;
 use BiiiiiigMonster\Throttle\Throttle;
 use BiiiiiigMonster\Throttle\ThrottleRegister;
 use BiiiiiigMonster\Throttle\Annotation\Mapping\Throttle as ThrottleMapping;
-use BiiiiiigMonster\Throttle\Annotation\Mapping\Throttles as ThrottlesMapping;
 use Swoft\Aop\Annotation\Mapping\After;
 use Swoft\Aop\Annotation\Mapping\Aspect;
 use Swoft\Aop\Annotation\Mapping\Before;
@@ -23,7 +22,7 @@ use Swoft\Bean\Annotation\Mapping\Inject;
  *
  * @Aspect()
  * @PointAnnotation(
- *     include={ThrottleMapping::class,ThrottlesMapping::class}
+ *     include={ThrottleMapping::class}
  * )
  */
 class ThrottleAspect

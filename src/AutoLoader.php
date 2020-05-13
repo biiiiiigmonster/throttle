@@ -4,6 +4,7 @@ namespace BiiiiiigMonster\Throttle;
 
 use Swoft\Helper\ComposerJSON;
 use Swoft\SwoftComponent;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use function dirname;
 
 /**
@@ -47,6 +48,10 @@ class AutoLoader extends SwoftComponent
         return [
             'throttle' => [
                 'class' => Throttle::class,
+                'el' => bean('el'),
+            ],
+            'el' => [
+                'class' => ExpressionLanguage::class,
             ],
         ];
     }

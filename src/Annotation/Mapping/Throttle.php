@@ -11,7 +11,7 @@ use Doctrine\Common\Annotations\Annotation\Target;
  * Class Throttle
  * @package BiiiiiigMonster\Throttle\Annotation\Mapping
  * @Annotation
- * @Target({"METHOD","ANNOTATION"})
+ * @Target({"METHOD"})
  * @Attributes(
  *     @Attribute("rate",type="string"),
  *     @Attribute("prefix",type="string"),
