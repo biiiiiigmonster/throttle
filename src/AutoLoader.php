@@ -48,10 +48,6 @@ class AutoLoader extends SwoftComponent
         return [
             'throttle' => [
                 'class' => Throttle::class,
-                'el' => bean('el'),
-            ],
-            'el' => [
-                'class' => ExpressionLanguage::class,
             ],
         ];
     }
