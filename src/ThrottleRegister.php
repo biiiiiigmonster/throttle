@@ -4,6 +4,7 @@
 namespace BiiiiiigMonster\Throttle;
 
 use BiiiiiigMonster\Throttle\Annotation\Mapping\Throttle;
+use Carbon\CarbonInterval;
 use Swoft\Stdlib\Helper\ArrayHelper;
 use Swoft\Stdlib\Helper\StringHelper;
 
@@ -21,13 +22,10 @@ class ThrottleRegister
      */
     public static function register(string $className,string $method,Throttle $throttle): void
     {
-        [$maxAccepts,$duration] = StringHelper::explode($throttle->getRate(),'/',2);
-        $value = substr($duration,0,-1);
-        $unit = substr($duration,-1);
-        $ttl = $value * ArrayHelper::get(['s'=>1,'m'=>60,'h'=>60*60,'d'=>60*60*24],$unit,1);
+        [$maxAccepts,$intervalDefinition] = StringHelper::explode($throttle->getRate(),'/',2);
+        $ttl = CarbonInterval::fromString($intervalDefinition);
 
-        $throttleConfig = [$throttle->getPrefix(),$maxAccepts,$ttl];
-        self::$throttle[$className][$method][$throttle->getKey()] = $throttleConfig;
+        self::$throttle[$className][$method][$throttle->getKey()] = [$throttle->getPrefix(),$throttle->getRate()];
     }
 
     /**

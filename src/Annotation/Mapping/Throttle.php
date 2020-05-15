@@ -32,7 +32,12 @@ final class Throttle
 
     /**
      * @var string
-     * @example 1/1m,1/5m,5/30s... unit support [s:每秒,m:每分,h:每小时,d:每天]
+     * 支持两种格式，区分条件为分隔符
+     * 1、相对时间值，分隔符为'/'，比如1分钟内限制访问1次。
+     * 2、绝对时间值，分隔符为'|'，比如某时刻内限制访问1次。
+     * @example 1/1m,1/2h 5m,5/30s... maxAccepts/intervalDefinition 分母表达式参考CarbonInterval::fromString入参
+     * @example 1|tomorrow,1|+2 day 23:59:59... maxAccepts/parse 分母表达式参考Carbon::parse入参
+     * Ps：第二种格式好像可以实现定点活动开启验证功能诶，例如这样:0|2020-12-31 12:00:00
      */
     private $rate = '1/1m';
 
